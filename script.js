@@ -19,11 +19,17 @@ $(document).ready(function(){
         $('.content').fadeOut(0);
         $('#content3').fadeIn(0);
     });
-      $('#menu5').click(function(){
+      $('#menu4').click(function(){
         $('.button').removeClass('active');            
         $(this).addClass('active');
         $('.content').fadeOut(0);
-        $('#content5').fadeIn(0);
+        $('#content4').fadeIn(0);
+    });
+        $('#menu6').click(function(){
+        $('.button').removeClass('active');            
+        $(this).addClass('active');
+        $('.content').fadeOut(0);
+        $('#content6').fadeIn(0);
     });
 });  
 
