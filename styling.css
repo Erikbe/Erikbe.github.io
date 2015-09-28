@@ -30,6 +30,8 @@ thead {
 	background-color:rgba(234,234,234,0.3);
 }
 
+.blur { filter:blur(add = 0, direction = 300, strength = 10); }
+
 #bgpicture{
    	position:fixed;
 	right:0;
@@ -39,11 +41,6 @@ thead {
 	width:auto;
 	height:auto;
 	z-index:-9999;
-	-webkit-filter:grayscale(100%);
-	-moz-filter:grayscale(100%);
-	filter:grayscale(100%);
-    -webkit-transform: scaleX(1.25); 
-    -moz-transform: scaleX(1.25);
 
     -webkit-filter: blur(5px);
     -moz-filter: blur(5px);
@@ -165,9 +162,10 @@ thead {
 
 
 #content5_iframe{
+	overflow:hidden;
 	margin-top:40px;
 	width:100%;
-	height:900px;
+	height:850px;
 }
 
 
