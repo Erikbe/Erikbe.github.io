@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			#canvas {
+				position:absolute;
+				left:0;
+				right:0;
+				margin-left:auto;
+				margin-right:auto;
+			}		
+			
+			#addCircle {
+				z-index: 9999;
+			   position: absolute;
+			   top: 20px;
+			   left: 20px;
+			}
+		</style>
+		<script>
+			function init() {
+				var canvasElement = document.getElementsByTagName('canvas')[0];
+				var canvas = canvasElement.getContext('2d');
+				
+				var container = {x:0,y:0,width:1600,height:800};
+				var circles = [{x:1000,y:300,r:80,color:125,vx:8,vy:-5}];
+
+				function circle() {
+					canvas.fillStyle = 'hsl(' + color++ + ',100%, 50%)';
+					canvas.beginPath();
+					canvas.arc(200, 200, radius, 0, 2*Math.PI, false);
+					canvas.fill();
+					radius += 2;
+					if (radius < 200) {
+						requestAnimationFrame(circle);
+					}
+				}
+				
+				function draw() {
+					canvas.fillStyle = 'white';
+					canvas.fillRect(container.x, container.y, container.width, container.height);
+					
+					for (var i = 0; i < circles.length; i++) {
+						canvas.fillStyle = 'hsl(' + circles[i].color++ + ',100%, 50%)';
+						canvas.beginPath();
+						canvas.arc(circles[i].x,circles[i].y,circles[i].r,0,2*Math.PI, false);
+						canvas.fill();
+					
+						if ((circles[i].x + circles[i].vx + circles[i].r > container.x + container.width) || (circles[i].x - circles[i].r + circles[i].vx < container.x)) {
+							circles[i].vx = -circles[i].vx;
+						}
+						if ((circles[i].y + circles[i].vy + circles[i].r > container.x + container.height) || (circles[i].y - circles[i].r + circles[i].vy < container.y)) {
+							circles[i].vy = -circles[i].vy;
+						}
+						
+						circles[i].x += circles[i].vx;
+						circles[i].y += circles[i].vy
+					}
+					requestAnimationFrame(draw);
+				}
+				
+				draw();
+				
+				function addCircle(event) {
+					var circle = {
+						x: event.clientX,
+						y: event.clientY,
+						r: 20 + 130*Math.random(),
+						color: 360*Math.random(),
+						vx: -20*Math.random() + 20*Math.random(),
+						vy: -20*Math.random() + 20*Math.random()
+					}
+					
+					circles.push(circle);
+				}
+				
+				function velocityControl(event) {
+					 if (event.wheelDelta >= 0) {
+							var factor = 1.5;
+							for (var i=0; i<circles.length;i++) {
+								circles[i].vx = factor*circles[i].vx;
+								circles[i].vy = factor*circles[i].vy;
+							}
+						}
+						else {
+							var factor = 0.5;
+							for (var i=0; i<circles.length;i++) {
+								circles[i].vx = factor*circles[i].vx;
+								circles[i].vy = factor*circles[i].vy;
+							}
+						}
+				}
+				
+				canvasElement.addEventListener('mousedown', addCircle, false);
+				canvasElement.addEventListener('mousewheel', velocityControl, false);
+			}
+		</script>
+	</head>
+	<body onload="init();">
+		<canvas id="canvas" width="1600px" height="800px"/>
+	</body>
+</html>

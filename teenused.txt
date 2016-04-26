@@ -1,7 +1,0 @@
-TEENUS | KIRJELDUS | HIND
-
-teenus1,kirjeldus1,hind1
-teenus2,kirjeldus2,hind2
-teenus3,kirjeldus3,hind3
-teenus4,kirjeldus4,hind4
-teenus5,kirjeldus5,hind5
